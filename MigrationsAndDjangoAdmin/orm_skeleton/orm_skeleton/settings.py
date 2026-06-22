@@ -20,13 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r*xzfyk6%b7w0&43tzvfw(5wa&*vx(o+ndgc+e2*_stw_1i2*n'
+SECRET_KEY = 'django-insecure-)f()b25jg&bm1nmo)^gfqx*y8epe^#3+vfhqyk%)48hvo_!gyv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://gator-causal-monthly.ngrok-free.app"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -78,7 +77,7 @@ WSGI_APPLICATION = 'orm_skeleton.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "model_basics",
+        "NAME": "migration_and_admin",
         "USER": "postgres",
         "PASSWORD": "admin",
         "HOST": "127.0.0.1",
