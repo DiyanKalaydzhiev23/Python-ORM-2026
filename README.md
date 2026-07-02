@@ -31,6 +31,8 @@ Get-ChildItem -Path . -Recurse -Force |
 
 - [Working with Queries](https://forms.gle/kieTF55zwmK2eAaM7)
 
+- [Django Relations](https://forms.gle/6uvQdwzqfxt87kD36)
+
 ---
 
 ### Django Models
@@ -319,3 +321,65 @@ Working with Queries
    - filter().delete()
 
 ---
+
+###  Django Relations
+
+Django Models Relations
+
+1. Релации в Django Модели
+   - Получават се използвайки ForeignKey полета
+   - related_name - можем да направим обартна връзка
+     - По дефолт тя е името + _set
+  
+   - Пример:
+   ```py
+   class Author(models.Model):
+       name = models.CharField(max_length=100)
+   
+   class Post(models.Model):
+       title = models.CharField(max_length=200)
+       content = models.TextField()
+       author = models.ForeignKey(Author, on_delete=models.CASCADE)
+   ```
+
+- Access all posts written by an author
+```py
+author = Author.objects.get(id=1)
+author_posts = author.post_set.all()
+```
+
+3. Types of relationships
+   - Many-To-One (One-To-Many)
+   - Many-To-Many 
+     - Няма значение, в кой модел се слага
+     - Django автоматично създава join таблица или още наричана junction
+     - Но, ако искаме и ние можем да си създадем: 
+      ```py
+      class Author(models.Model):
+          name = models.CharField(max_length=100)
+      
+      class Book(models.Model):
+          title = models.CharField(max_length=200)
+          authors = models.ManyToManyField(Author, through='AuthorBook')
+      
+      class AuthorBook(models.Model):
+          author = models.ForeignKey(Author, on_delete=models.CASCADE)
+          book = models.ForeignKey(Book, on_delete=models.CASCADE)
+          publication_date = models.DateField()
+      ```
+
+   - OneToOne, предимно се слага на PK
+   - Self-referential Foreign Key
+      - Пример имаме работници и те могат да са мениджъри на други работници
+        
+   ```py
+   class Employee(models.Model):
+       name = models.CharField(max_length=100)
+       supervisor = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+   ```
+
+    - Lazy Relationships - обекта от релацията се взима, чрез заявка, чак когато бъде повикан
+
+---
+
+
