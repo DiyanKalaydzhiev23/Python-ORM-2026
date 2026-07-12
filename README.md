@@ -599,13 +599,10 @@ author_posts = author.post_set.all()
 
 ---
 
----
-
-
 ### Advanced Django Queries
 
 1. Custom managers
-   - Използваме ги, за да изнсем бизнез логиката, за често използвани заявки на едно място
+   - Използваме ги, за да изнсем бизнес логиката, за често използвани заявки на едно място
    - Правим го наследявайки мениджъра по подразбиране.
 	
 	```py
@@ -639,8 +636,6 @@ author_posts = author.post_set.all()
 Общо
 Използват се за оптимизация на заявки и избягване на N+1 проблема.
 
----
-
  `select_related`
 - Работи при **OneToOne** и **ForeignKey (Many-To-One)**.
 - Прави **JOIN** и взима свързаните обекти в една заявка.
@@ -653,8 +648,6 @@ books = Book.objects.select_related('author', 'publisher')
 # LEFT JOIN author ON ...
 # LEFT JOIN publisher ON ...
 ```
-
----
 
  `prefetch_related`
 - Работи при **ManyToMany** и **reverse ForeignKey (One-To-Many)**.
@@ -669,15 +662,12 @@ authors = Author.objects.prefetch_related('book_set')
 #    INNER JOIN book_authors ON ...
 ```
 
----
-
 Комбиниране
 ```py
 Book.objects.select_related('author__country', 'publisher') \
             .prefetch_related('genres', 'reviews')
 ```
 
----
 
 4. Q and F
 
